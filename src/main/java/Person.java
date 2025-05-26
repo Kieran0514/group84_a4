@@ -1,4 +1,4 @@
-import com.java.util.HashMap;
+import java.util.HashMap;
 import java.util.Date;
 import java.util.Scanner;
 
