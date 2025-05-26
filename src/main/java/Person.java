@@ -56,8 +56,8 @@ public class Person {
         Scanner scanner = new Scanner(System.in);
         int choice;
 
-        //set up while loop to facilitate menu functionality
-        //depending on user input, different methods will be called
+        //set up do-while loop to facilitate menu functionality
+        //depending on user input, one of the 3 different methods will be called
         do {
             //print menu options
             System.out.println("=== Enter the corresponding key for what you want to do ==="); 
