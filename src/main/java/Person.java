@@ -80,7 +80,7 @@ public class Person {
                     //addDemeritPoints functionality
                 case 4:
                     System.out.println("Goodbye!"); //end the program
-                    break;
+                    System.exit(0);
                 default:
                     System.out.println("Invalid choice. Please try again.");
                 } 
