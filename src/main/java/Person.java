@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Date;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class Person {
     private String personID;
@@ -8,10 +10,12 @@ public class Person {
     private String lastName;
     private String address;
     private String birthdate;
+    private String demeritDate;
+    private Integer points;
     private HashMap<Date, Integer> demeritPoints;
     private boolean isSuspended;
 
-    public boolean addPerson(String id, String fname, String lname, String addy, Date bdate) {
+    public boolean addPerson(String id, String fname, String lname, String addy, String bdate) {
     // Condition 1: personID should be exactly 10 characters long;
     // the first two characters should be numbers between 2 and 9,
     // there should be at least two special characters between characters 3 and 8,
@@ -28,7 +32,7 @@ public class Person {
         return true;
     }
 
-    public boolean updatePersonalDetails(String id, String fname, String lname, String addy, Date bdate) {
+    public boolean updatePersonalDetails(String id, String fname, String lname, String addy, String bdate) {
     // Condition 1: If a person is under 18, their address cannot be changed.
 
     // Condition 2: If a person's birthday is going to be changed, then no other personal detail 
@@ -39,7 +43,7 @@ public class Person {
         return true;
     }
 
-    public String addDemeritPoints(Date date, int points) {
+    public String addDemeritPoints(String id, String date, int points) {
     // Condition 1: The format of the date of the offense should follow the following format: 
     // DD-MM-YYYY. Example: 15-11-1990
 
@@ -52,9 +56,10 @@ public class Person {
     }
 
     public static void main(String[] args) {
-        //set up scanner to take user input
-        Scanner scanner = new Scanner(System.in);
-        int choice;
+        Person person = new Person(); //create new person object
+        Scanner scanner = new Scanner(System.in); //set up scanner to take user input
+        int choice; //variable for choosing menu item
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //format date for user input
 
         //set up do-while loop to facilitate menu functionality
         //depending on user input, one of the 3 different methods will be called
@@ -66,18 +71,53 @@ public class Person {
             System.out.println("(3) Add demerit points to a user");
             System.out.println("(4) Quit the program");
 
-            //take input for menu
-            choice = scanner.nextInt();
+            choice = scanner.nextInt(); //take input for menu
 
             switch (choice) {
                 case 1:
-                    //addPerson functionality
+                    //set all the variables
+                    System.out.println("Enter user ID: ");
+                    person.setID(scanner.next());
+                    System.out.println("Enter first name: ");
+                    person.setFname(scanner.next());
+                    System.out.print("Enter last name: ");
+                    person.setLname(scanner.next());
+                    System.out.println("Enter the address of the user: ");
+                    person.setAddress(scanner.next());
+                    System.out.println("Enter user's birthdate: ");
+                    person.setBirthdate(scanner.next());
+
+                    //call addPerson() to run validation checks
+                    person.addPerson(person.getID(), person.getFname(), person.getLname(), person.getAddress(), person.getBirthdate());
                     break;
                 case 2:
-                    //updatePersonalDetails functionality
+                    //set all the variables
+                    System.out.println("Enter new user ID (leave blank to leave unchanged): ");
+                    person.setID(scanner.next());
+                    System.out.println("Enter new first name (leave blank to leave unchanged): ");
+                    person.setFname(scanner.next());
+                    System.out.print("Enter new last name (leave blank to leave unchanged): ");
+                    person.setLname(scanner.next());
+                    System.out.println("Enter the new address of the user (leave blank to leave unchanged): ");
+                    person.setAddress(scanner.next());
+                    System.out.println("Enter user's new birthdate (leave blank to leave unchanged): ");
+                    person.setBirthdate(scanner.next());
+
+                    //call updatePersonalDetails() to run validation checks
+                    person.updatePersonalDetails(person.getID(), person.getFname(), person.getLname(), person.getAddress(), person.getBirthdate());
                     break;
                 case 3:
-                    //addDemeritPoints functionality
+                    //set all the variables
+                    System.out.println("Enter user ID: ");
+                    person.setID(scanner.next());
+                    System.out.println("Enter date of offense: ");
+                    person.setDemeritDate(scanner.next());
+                    System.out.println("Enter # of demerit points: ");
+                    person.setPoints(scanner.nextInt());
+
+                    //call addDemeritPoints() to run validation checks
+                    person.addDemeritPoints(person.getID(), person.getDemeritDate(), person.getPoints());
+
                 case 4:
                     System.out.println("Goodbye!"); //end the program
                     System.exit(0);
@@ -87,5 +127,74 @@ public class Person {
             } while (choice != 3);
 
             scanner.close();
+    }
+
+    //setters and getters
+    public String getID() {
+        return personID;
+    }
+
+    public void setID(String id) {
+        personID = id;
+    }
+
+    public String getFname() {
+        return firstName;
+    }
+
+    public void setFname(String fname) {
+        firstName = fname;
+    }
+
+    public String getLname() {
+        return lastName;
+    }
+
+    public void setLname(String lname) {
+        lastName = lname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String addy) {
+        address = addy;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String bdate) {
+        birthdate = bdate;
+    }
+
+    public String getDemeritDate() {
+        return demeritDate;
+    }
+
+    public void setDemeritDate(String ddate) {
+        demeritDate = ddate;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer pts) {
+        points = pts;
+    }
+
+    public HashMap<Date, Integer> getDemeritPoints() {
+        return demeritPoints;
+    }
+
+    public boolean getSuspended() {
+        return isSuspended;
+    }
+
+    public void setSuspended(boolean susp) {
+        isSuspended = susp;
     }
 }
