@@ -99,7 +99,10 @@ public class Person {
             status = false;
         }
 
-        if (!status) { //let the user know the requirements for adding a person if it fails
+        if (status) { //all checks passed
+            System.out.println("Successfully added user.");
+        }
+        else { //let the user know the requirements for adding a person if it fails
             System.out.println("Failed to add person. Please ensure the following: ");
             System.out.println("- ID has exactly 10 characters");
             System.out.println("- First 2 characters of ID must be a number between 2 and 9");
